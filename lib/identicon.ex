@@ -11,6 +11,11 @@ defmodule Identicon do
     |> pick_color
     |> build_grid
     |> filter_odd_squares
+    |> build_pixel_map
+  end
+
+  def build_pixel_map() do
+    # build the pixel map which maps each colored grid point to its respective pixel position on the pixel grid
   end
 
   @spec! filter_odd_squares(struct()) :: struct()
