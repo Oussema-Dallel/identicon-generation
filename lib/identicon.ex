@@ -4,17 +4,16 @@ defmodule Identicon do
   @moduledoc """
   Documentation for `Identicon`.
   """
-  @spec! main(String.t()) :: list
+  @spec! main(String.t()) :: struct()
   def main(input) do
     input
     |> hash_input
     |> pick_color
   end
 
-  @spec! pick_color(struct()) :: list
-  def pick_color(image) do
-    %Identicon.Image{hex: [r, g, b | _tail]} = image
-    [r, g, b]
+  @spec! pick_color(struct()) :: struct()
+  def pick_color(%Identicon.Image{hex: [r, g, b | _tail]} = image) do
+    %Identicon.Image{image | color: {r, g, b}}
   end
 
   @spec! hash_input(String.t()) :: struct()
