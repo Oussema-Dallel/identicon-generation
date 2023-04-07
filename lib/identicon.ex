@@ -4,7 +4,7 @@ defmodule Identicon do
   @moduledoc """
   Documentation for `Identicon`.
   """
-  @spec! main(String.t()) :: list
+  @spec! main(String.t()) :: struct()
   def main(input) do
     input
     |> hash_input
@@ -17,11 +17,16 @@ defmodule Identicon do
     %Identicon.Image{image | color: {r, g, b}}
   end
 
-  @spec! build_grid(struct()) :: list
+  @spec! build_grid(struct()) :: struct()
   def build_grid(%Identicon.Image{hex: hex} = image) do
-    hex
-    |> Enum.chunk_every(3, 3, :discard)
-    |> Enum.map(&mirror_row/1)
+    grid =
+      hex
+      |> Enum.chunk_every(3, 3, :discard)
+      |> Enum.map(&mirror_row/1)
+      |> List.flatten()
+      |> Enum.with_index()
+
+    %Identicon.Image{image | grid: grid}
   end
 
   @spec! mirror_row(Enum.t()) :: Enum.t()
