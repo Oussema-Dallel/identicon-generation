@@ -14,7 +14,7 @@ defmodule Identicon.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger | :crypto]
+      extra_applications: [:logger, :crypto]
     ]
   end
 
@@ -22,6 +22,7 @@ defmodule Identicon.MixProject do
   defp deps do
     [
       {:type_check, "~> 0.13.3"},
+      {:egd, github: "erlang/egd"},
       # To allow spectesting and property-testing data generators (optional):
       {:stream_data, "~> 0.5.0", only: :test},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false}
